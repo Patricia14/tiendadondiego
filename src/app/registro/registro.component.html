@@ -1,0 +1,198 @@
+
+<div class="header">
+  <h2>Tienda de Don Diego</h2>
+ <br>
+
+<table border="solid">
+  <tr><th>Productos</th><th>Clientes</th></tr>
+  <tr><th>
+    <table border="solid">
+      <thead>
+        
+      <tr>
+      <th>Codigo producto</th>
+      <th>producto</th>
+      <th>precio</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{unidadesCodigo[0]}}</th>
+          <th>{{unidadesProdu[0]}}</th>
+          <th>${{unidadesPrecio[0]}}</th>
+        </tr>
+        
+        <tr>
+          <th>{{unidadesCodigo[1]}}</th>
+          <th>{{unidadesProdu[1]}}</th>
+          <th>${{unidadesPrecio[1]}}</th>
+        </tr>
+        
+        <tr>
+          <th>{{unidadesCodigo[2]}}</th>
+          <th>{{unidadesProdu[2]}}</th>
+          <th>${{unidadesPrecio[2]}}</th>
+        </tr>
+  
+        <tr>
+          <th>{{unidadesCodigo[3]}}</th>
+          <th>{{unidadesProdu[3]}}</th>
+          <th>${{unidadesPrecio[3]}}</th>
+        </tr>
+        <tr>
+          <th>{{unidadesCodigo[4]}}</th>
+          <th>{{unidadesProdu[4]}}</th>
+          <th>${{unidadesPrecio[4]}}</th>
+        </tr>
+  
+          
+        </tbody>
+        </table>
+  </th><th>
+  
+      <table border="solid">
+      
+        <thead>
+        <tr>
+        <th>Codigo Cliente</th>
+        <th>Nombre de cliente</th>
+        <th>Facturas realizadas</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{{personaDui[0]}}</th>
+            <th>{{personaNombre[0]}}</th>
+            <th>{{personaCompras[0]}}</th>
+          </tr>
+          
+          <tr>
+            <th>{{personaDui[1]}}</th>
+            <th>{{personaNombre[1]}}</th>
+            <th>{{personaCompras[1]}}</th>
+          </tr>
+          
+          <tr>
+            <th>{{personaDui[2]}}</th>
+            <th>{{personaNombre[2]}}</th>
+            <th>{{personaCompras[2]}}</th>
+          </tr>
+    
+          <tr>
+            <th>{{personaDui[3]}}</th>
+            <th>{{personaNombre[3]}}</th>
+            <th>{{personaCompras[3]}}</th>
+          </tr>
+          <tr>
+            <th>{{personaDui[4]}}</th>
+            <th>{{personaNombre[4]}}</th>
+            <th>{{personaCompras[4]}}</th>
+          </tr>
+    
+            
+          </tbody>
+          </table>
+    
+  </th></tr>
+  
+</table >
+
+ </div>
+  
+    
+<label>Nombre (Nuevo cliente):</label>
+    <input type="text" [(ngModel)]="nombre">
+    <label>DUI:</label>
+    <input type="text" [(ngModel)]="dui">
+    <button class="button" (click)="ingresar()">Ingresar</button>
+    <br/><br/>
+
+    
+<label>Seleccione Producto:</label>
+       <select [(ngModel)]="opcionSeleccionadoT" (change)="capturarProducto()">
+        <option value="Selecciona">Selecciona</option>
+        <option *ngFor="let pc of unidadesCodigo" value="{{pc}}" >
+        {{pc}}
+        </option>
+       </select>
+       <label [hidden]="opcionSeleccionadoT == 'Selecciona'">El Producto seleccionado es:
+       <table border="solid">
+        <thead>
+        <tr>
+        <th>Codigo</th>
+        <th>Nombre del producto</th>
+        <th>Precio</th>
+        <th>Descripción</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+          <td>{{opcionSeleccionadoT}}</td>
+          <td>{{valorProdu}}</td>
+          <td>${{valorPrecio}}</td>
+          <td>{{valorDescri}}</td>
+
+          </tr>
+          </tbody>
+          </table>
+    
+      </label>
+       
+
+       <label>Seleccione cliente:</label>
+       <select [(ngModel)]="opcionSeleccionadoP" (change)="capturarPersona()">
+        <option value="Selecciona">Selecciona</option>
+        <option *ngFor="let pd of personaDui" value="{{pd}}" >
+        {{pd}}
+        </option>
+       </select>
+       <label [hidden]="opcionSeleccionadoP == 'Selecciona'">El cliente seleccionado es:
+       <table border="solid">
+        <thead>
+        <tr>
+        <th>DUI</th>
+        <th>Nombre</th>
+        <th>Numero de facturas</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+          <td>{{opcionSeleccionadoP}}</td>
+          <td>{{valorPersona}}</td>
+          <td>{{valorFac}}</td>
+          </tr>
+          </tbody>
+          </table>
+          
+          <button class="button" (click)="facturar()">Facturar</button>
+          <div class="header">Factura</div>
+          <table [hidden]="contadorFactura == 0" border="solid">
+            <thead>
+            <tr>
+              <th>Dui Cliente</th>
+              <th>Nombre Cliente</th>
+              <th>Codigo de producto</th>
+              <th>Nombre de Producto</th>
+              <th>Descripcion de producto</th>
+              <th>Precio</th>
+              <th>Descuento aplicado</th>
+              <th>Precio con descuento</th>
+              
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let facturat of registro">
+              <td>{{opcionSeleccionadoP}}</td>
+              <td>{{nombreCliente}}</td>
+              <td>{{opcionSeleccionadoT}}</td>
+              <td>{{nombrProducto}}</td>
+              <td>{{descriProducto}}</td>
+              <td>${{precioProducto}}</td>
+              <td>{{descuento}}%</td>
+              <td>${{precioProductoDescuento}}</td>
+              </tr>
+              </tbody>
+              </table>
+      </label>
+   
+            
